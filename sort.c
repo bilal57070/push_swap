@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/29 18:32:50 by mirio             #+#    #+#             */
+/*   Updated: 2023/11/02 18:33:25 by mirio            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -15,21 +26,20 @@
     }
 }*/
 
-void    puttab(t_nbr *nbr)
+void	puttab(t_nbr *nbr)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    j = 0;
-    i = -1;
-    nbr->tab = malloc(sizeof(int) * nbr->len + 1);
-    while (nbr->r[++i])
-    {
-        nbr->tab[j] = ft_atoi(nbr->r[i]);
-        ft_printf("tab = %d\n", nbr->tab[j]);
-        j++;
-    }
-    nbr->tab[i] = 0;
+	j = 0;
+	i = -1;
+	nbr->tab = malloc(sizeof(int) * nbr->len + 1);
+	while (nbr->r[++i])
+	{
+		nbr->tab[j] = ft_atoi(nbr->r[i]);
+		j++;
+	}
+	nbr->tab[i] = 0;
 }
 
 /*void    sorttab1(t_nbr *nbr)
@@ -44,54 +54,57 @@ void    puttab(t_nbr *nbr)
     }
 }*/
 
-void    sorttab(t_nbr *nbr)
+void	sorttab(t_nbr *nbr)
 {
-    int i;
-    int j;
-    int tri;
+	int	i;
+	int	tri;
 
-    i = 0;
-    while (i < nbr->len - 1)
-    {
-        if (nbr->tab[i] > nbr->tab[i + 1])
-        {
-            tri = nbr->tab[i];
-            nbr->tab[i] = nbr->tab[i + 1];
-            nbr->tab[i + 1] = tri;
-            i = 0;
-        }
-        else
-            i++;
-    }
-    indexing(nbr);
-    j = -1;
-    while(nbr->tab[++j])
-        ft_printf("trier  = %d\n", nbr->tab[j]);
+	i = 0;
+	while (i < nbr->len - 1)
+	{
+		if (nbr->tab[i] > nbr->tab[i + 1])
+		{
+			tri = nbr->tab[i];
+			nbr->tab[i] = nbr->tab[i + 1];
+			nbr->tab[i + 1] = tri;
+			i = 0;
+		}
+		else
+			i++;
+	}
+	indexing(nbr);
 }
 
-void    indexing(t_nbr *nbr)
+void	indexing(t_nbr *nbr)
 {
-    t_liste *tmp;
-    int     i;
+	t_liste	*tmp;
+	int		i;
 
-    i = 0;
-    tmp = nbr->lst;
-    while (tmp)
-    {
-        if (tmp->num == nbr->tab[i])
-        {
-            tmp->index = i;
-            tmp = tmp->next;
-            i = -1;
-        }
-        i++;
-    }
-    tmp = nbr->lst;
-    while (tmp)
+	i = 0;
+	tmp = nbr->lst;
+	while (tmp)
 	{
-		ft_printf("lst raaaa : %d\n", tmp->index);
-		tmp = tmp->next;
+		if (tmp->num == nbr->tab[i])
+		{
+			tmp->index = i;
+			tmp = tmp->next;
+			i = -1;
+		}
+		i++;
 	}
+	tmp = nbr->lst;
+}
+
+void	sort(t_nbr *nbr)
+{
+	if (nbr->len == 3)
+		small3(nbr);
+	else if (nbr->len == 4)
+		small4(nbr);
+	else if (nbr->len == 5)
+		small5(nbr);
+	else
+		radix(nbr);
 }
 
 //if 0 pb, remettre la liste au pointeur de depart, pa,

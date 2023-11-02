@@ -1,7 +1,5 @@
-
-
 SRCS = main.c parsing.c parsing2.c mouv.c utils.c sort.c utils2.c \
-		smallsort.c \
+		smallsort.c mouv2.c \
 
 OBJS = ${SRCS:.c=.o}
 NAME = push_swap

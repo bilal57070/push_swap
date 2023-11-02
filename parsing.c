@@ -1,48 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/29 18:32:28 by mirio             #+#    #+#             */
+/*   Updated: 2023/11/02 19:10:02 by mirio            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-int    checkmax(t_nbr *nbr, char **av)
+int	checkmax(t_nbr *nbr, char **av)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (av[++i])
-    {
-        if  ((ft_atoi(av[i]) < -2147483647 || ft_atoi(av[i]) > 2147483646))
-        {
-            ft_printf("Error\n");
-            return(1);
-        }
-    }
-    lenarg(nbr, av);
-    return (0);
+	i = -1;
+	while (nbr->tab[++i])
+	{
+		if (nbr->tab[i] < -2147483647 || nbr->tab[i] > 2147483646)
+		{
+			ft_printf("Error\n");
+			exit(1);
+		}
+	}
+	lenarg(nbr, av);
+	return (0);
 }
 
-int    checkav(char **av)
+int	checkav(char **av)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while (av[++i])
-    {
-        j = -1;
-        while (av[i][++j])
-        {
-            if (j != 0 && av[i][j] == '-' && av[i][j - 1] != ' ')
-            {
-                ft_printf("error\n un - perdu");
-                exit(1);
-            }
-            if (av[i][j] != '-' && av[i][j] != ' ' && (!(av[i][j] >= '0' && av[i][j] <= '9')))
-            {
-                ft_printf("Error\n caractere perdu");
-                exit(1);
-            }
-        }
-    }
-    return (0);
+	i = 0;
+	while (av[++i])
+	{
+		j = -1;
+		while (av[i][++j])
+		{
+			if (j != 0 && av[i][j] == '-' && av[i][j - 1] != ' ')
+			{
+				ft_printf("error\n un - perdu");
+				exit(1);
+			}
+			if (av[i][j] != '-' && av[i][j] != ' ' &&
+			(!(av[i][j] >= '0' && av[i][j] <= '9')))
+			{
+				ft_printf("Error\n caractere perdu");
+				exit(1);
+			}
+		}
+	}
+	return (0);
 }
 
 /*void    checker(t_nbr *nbr, char **av)
@@ -54,115 +65,94 @@ int    checkav(char **av)
     else
         checkdoub2(nbr, av);
 }*/
-int     lenr(char **str)
+
+int	checkdoub1(t_nbr *nbr)
 {
-    int i;
-    int len;
-    
-    i = -1;
-    len = 0;
-    while (str[++i])
-        len++;
-    return (len);
-}
+	int	i;
+	int	p;
 
-int    checkdoub1(t_nbr *nbr)
-{
-    int i;
-    int j;
-    int p;
-    int res;
-    int o;
-
-    i = -1;
-    p = 0;
-    o = 0;
-    nbr->len = lenr(nbr->r);
-    while (nbr->r[++i])
-    {
-        j = -1;
-        res = 0;
-        while (nbr->r[i][++j] != '\0')
-        {
-            res = ft_strcmp(nbr->r[i], nbr->r[p]);
-            if (nbr->r[p][j + 1] == '\0' && res == 0)
-                o++;
-        }
-        if (nbr->r[i + 1] == '\0' && nbr->r[p + 1] != '\0')
-        {
-            i = 0;
-            p++;
-        }
-    }
-    if (o > nbr->len)
-    {
-        ft_printf("error: doublon nombre r\n");
-        return (1);
-    }
-    return (0);
-}
-
-/* if j = p av[i][j++] tant que != ' '*/
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	while ((s1[i] != '\0' || s2[i] != '\0'))
+	i = -1;
+	p = 0;
+	nbr->o = 0;
+	nbr->len = lenr(nbr->r);
+	nego(nbr, i, p);
+	if (nbr->o > nbr->len)
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		ft_printf("error: doublon nombre r\n");
+		exit(1);
 	}
 	return (0);
 }
 
-int   checkdoub2(t_nbr *nbr, char **av)
+void	nego(t_nbr *nbr, int i, int p)
 {
-    int i;
-    int j;
-    int p;
-    int res;
-    int o;
+	int	res;
+	int	j;
 
-    i = 0;
-    p = 1;
-    o = 0;
-    while (av[++i])
-    {
-        j = -1;
-        res = 0;
-        while (av[i][++j] != '\0')
-        {
-            res = ft_strcmp(av[i], av[p]);
-            if (av[p][j + 1] == '\0' && res == 0)
-                o++;
-        }
-        if (av[i + 1] == '\0' && av[p + 1] != '\0')
-        {
-            i = 0;
-            p++;
-        }
-    }
-    if (o > nbr->lenstr)
-    {
-        ft_printf("error: doublon nbr\n");
-        return (1);
-    }
-    return (0);
+	while (nbr->r[++i])
+	{
+		j = -1;
+		res = 0;
+		while (nbr->r[i][++j] != '\0')
+		{
+			res = ft_strcmp(nbr->r[i], nbr->r[p]);
+			if (nbr->r[p][j + 1] == '\0' && res == 0)
+				nbr->o++;
+		}
+		if (nbr->r[i + 1] == NULL && nbr->r[p + 1] != NULL)
+		{
+			i = 0;
+			p++;
+		}
+	}
 }
 
-void    lenarg(t_nbr *nbr, char **av)
-{
-    int i;
-    
-    i = 0;
-    nbr->lenstr = 0;
-    while (av[++i])
-        nbr->lenstr++;
-}
+/* if j = p av[i][j++] tant que != ' '*/
 
+/*int	checkdoub2(t_nbr *nbr, char **av)
+{
+	int	i;
+	int	j;
+	int	p;
+	int	res;
+	int	o;
+
+	i = 0;
+	p = 1;
+	o = 0;
+	while (av[++i])
+	{
+		j = -1;
+		res = 0;
+		while (av[i][++j] != '\0')
+		{
+			res = ft_strcmp(av[i], av[p]);
+			if (av[p][j + 1] == '\0' && res == 0)
+				o++;
+		}
+		if (av[i + 1] == '\0' && av[p + 1] != '\0')
+		{
+			i = 0;
+			p++;
+		}
+	}
+	if (o > nbr->lenstr)
+	{
+		ft_printf("error: doublon nbr\n");
+		return (1);
+	}
+	return (0);
+}*/
+
+void	lenarg(t_nbr *nbr, char **av)
+{
+	int	i;
+
+	i = 0;
+	nbr->lenstr = 0;
+	while (av[++i])
+		nbr->lenstr++;
+}
 
 /*void    stockarg(t_nbr *nbr, char **av)
 {
@@ -278,18 +268,9 @@ char	**ft_splite(t_nbr *nbr, char **av)
 	return (nbr->sto);
 }*/
 
- 
-
-
-
 /*calculez taille arg pour malloc tab int ensuite stockez arg dans tab*/
 
-
 /* list ou tab de int = atoi(r[k++])*/
-
-
-
-
 
 /*void    checklet(char **av)
 {
@@ -311,6 +292,5 @@ char	**ft_splite(t_nbr *nbr, char **av)
     }
 }*/
 
-/* jsp pk mais le exit(1) ne fait pas son taff go essayer de trouver pk et comment installer le exit(failure)*/
-
-
+/* jsp pk mais le exit(1) ne fait pas son taff go essayer de trouver 
+pk et comment installer le exit(failure)*/

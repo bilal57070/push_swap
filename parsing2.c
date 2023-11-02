@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/29 18:32:38 by mirio             #+#    #+#             */
+/*   Updated: 2023/11/02 19:05:46 by mirio            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -39,7 +50,7 @@
     ft_lstiiter(*lst);
 }
 
-/*t_liste     *ft_lstput(t_nbr *nbr, char **av)
+t_liste     *ft_lstput(t_nbr *nbr, char **av)
 {
     int i;
     t_liste *lst;
@@ -65,90 +76,74 @@
     return (lst);
 }*/
 
-t_liste *ft_lstput(t_nbr *nbr, char **av)
+/*t_liste	*ft_lstput(t_nbr *nbr, char **av)
 {
-    int i;
-    //t_liste *lst;
-    t_liste *new;
-    t_liste *current;
+	t_liste	*new;
+	t_liste	*current;
 
-    i = 0;
-    //nbr->pileB = malloc(sizeof(t_liste));
-    nbr->pileB = NULL;
-    nbr->lst = NULL;
-    if (nbr->lenstr > 1)
-    {
-        //nbr->lst = malloc(sizeof(t_liste));
-        while (av[++i])
-        {
-            new = malloc(sizeof(t_liste));
-            if (!new)
-                return (0);
-            new->num = ft_atoi(av[i]);
-            new->next = NULL;
-            if (i == 1)
-            {
-                nbr->lst = new;
-                current = new;
-            }
-            else
-            {
-                current->next = new;
-                current = current->next;
-            }
-            //ft_printf("Element de la liste = %d\n", new->num);
-        }
-        //pb(nbr);
-        //pb(nbr);
-        //rra(nbr);
-        //sa(nbr->lst);
-        //rb(nbr);
-    }
-    else
-        nbr->lst = ft_lstput2(nbr);
-    //ft_printf("index : %d\n", nbr->lst->index);
-    //ft_lstiiter(nbr->lst);
-    return (nbr->lst);
+	new = NULL;
+	current = NULL;
+	nbr->pileb = NULL;
+	nbr->lst = NULL;
+	if (nbr->lenstr > 1)
+		pls(nbr, av, new, current);
+	else
+		ft_lstput2(nbr);
+	return (nbr->lst);
 }
 
-t_liste *ft_lstput2(t_nbr *nbr)
+int	pls(t_nbr *nbr, char **av, t_liste *new, t_liste *current)
 {
-    int i;
-    //t_liste *lst;
-    t_liste *new;
-    t_liste *current;
+	int	i;
 
-    i = -1;
-    //lst = malloc(sizeof(t_liste));
-    //if (!lst)
-    //    return (0);
-    while (nbr->r[++i])
-    {
-        new = malloc(sizeof(t_liste));
-        if (!new)
-            return (0);
-        new->num = ft_atoi(nbr->r[i]);
-        new->next = NULL;
-        if (i == 0)
-        {
-            nbr->lst = new;
-            current = new;
-        }
-        else
-        {
-            current->next = new;
-            current = current->next;
-        }
-        //ft_printf("Element de la liste = %d\n", new->num);
-    }
-    //pb(nbr);
-    //pb(nbr);
-    //pa(nbr);
-    //pa(nbr);
-    //ft_lstiiter(nbr->pileB);
-    //rra(nbr);
-    //ft_lstiiter(nbr->lst);
-    return (nbr->lst);
+	i = 0;
+	while (av[++i])
+	{
+		new = malloc(sizeof(t_liste));
+		if (!new)
+			return (0);
+		new->num = ft_atoi(av[i]);
+		new->next = NULL;
+		if (i == 1)
+		{
+			nbr->lst = new;
+			current = new;
+		}
+		else
+		{
+			current->next = new;
+			current = current->next;
+		}
+	}
+	return (0);
+}*/
+
+t_liste	*ft_lstput2(t_nbr *nbr)
+{
+	int		i;
+	t_liste	*new;
+	t_liste	*current;
+
+	i = -1;
+	while (nbr->r[++i])
+	{
+		new = malloc(sizeof(t_liste));
+		if (!new)
+			return (0);
+		new->num = ft_atoi(nbr->r[i]);
+		new->next = NULL;
+		if (i == 0)
+		{
+			nbr->lst = new;
+			current = new;
+		}
+		else
+		{
+			current->next = new;
+			current = current->next;
+		}
+	}
+	return (nbr->lst);
 }
 
 void	ft_lstiiter(t_liste *lst)
@@ -158,4 +153,16 @@ void	ft_lstiiter(t_liste *lst)
 		ft_printf("lst : %d\n", lst->num);
 		lst = lst->next;
 	}
+}
+
+int	lenr(char **str)
+{
+	int	i;
+	int	len;
+
+	i = -1;
+	len = 0;
+	while (str[++i])
+		len++;
+	return (len);
 }

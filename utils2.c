@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/29 18:32:59 by mirio             #+#    #+#             */
+/*   Updated: 2023/11/02 18:20:37 by mirio            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 char	**strjoin2(char **s1, char **s2)
 {
@@ -10,15 +20,24 @@ char	**strjoin2(char **s1, char **s2)
 
 	i = 0;
 	j = 0;
-    while (s1[i])
-        i++;
+	while (s1[i])
+		i++;
 	if (!s2)
 		return (s1);
-    while (s2[j])
-        j++;
+	while (s2[j])
+		j++;
 	str = malloc(sizeof(char *) * (i + j + 1));
 	if (!str)
 		return (0);
+	temp(s1, s2, str);
+	return (str);
+}
+
+void	temp(char **s1, char **s2, char **str)
+{
+	int	i;
+	int	j;
+
 	i = -1;
 	j = 0;
 	while (s1[++i])
@@ -29,13 +48,11 @@ char	**strjoin2(char **s1, char **s2)
 	str[j] = 0;
 	free_tab(s1);
 	free_tab(s2);
-	return (str);
 }
 
 void	putrav(t_nbr *nbr, char **av)
 {
 	int		i;
-	int		j;
 	char	**tmp;
 
 	i = 1;
@@ -43,12 +60,8 @@ void	putrav(t_nbr *nbr, char **av)
 	while (av[++i])
 	{
 		tmp = ft_split(av[i], ' ');
-		//ft_printf("test\n");
 		nbr->r = strjoin2(nbr->r, tmp);
 	}
-	//j = -1;
-	//while (nbr->r[++j])
-		//ft_printf(" oe : %s\n", nbr->r[j]);
 }
 
 void	free_tab(char **str)
@@ -59,4 +72,18 @@ void	free_tab(char **str)
 	while (str[++i])
 		free(str[i]);
 	free(str);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while ((s1[i] != '\0' || s2[i] != '\0'))
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
 }

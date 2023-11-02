@@ -1,119 +1,113 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   smallsort.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/29 18:32:44 by mirio             #+#    #+#             */
+/*   Updated: 2023/11/02 18:16:55 by mirio            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-int     small3(t_nbr *nbr)
+void	small3(t_nbr *nbr)
 {
-    int first;
-    int second;
-    int third;
+	int	first;
+	int	second;
+	int	third;
 
-    first = nbr->lst->index;
-    second = nbr->lst->next->index;
-    third = nbr->lst->next->next->index;
-    if (second < first && first < third)
-        sa(nbr->lst);
-    else if (first < second && third < first)
-        rra(nbr);
-    else if (first > second && second > third)
-    {
-        sa(nbr->lst);
-        rra(nbr);
-    }
-    else if (first < second && second > third)
-    {
-        rra(nbr);
-        sa(nbr->lst);
-    }
-    else if (first > second && second < third)
-        ra(nbr);
-    return (0);
+	first = nbr->lst->index;
+	second = nbr->lst->next->index;
+	third = nbr->lst->next->next->index;
+	if (second < first && first < third)
+		sa(nbr->lst);
+	else if (first < second && third < first)
+		rra(nbr);
+	else if (first > second && second > third)
+	{
+		sa(nbr->lst);
+		rra(nbr);
+	}
+	else if (first < second && second > third)
+	{
+		rra(nbr);
+		sa(nbr->lst);
+	}
+	else if (first > second && second < third)
+		ra(nbr);
 }
 
-int     small4(t_nbr *nbr)
+void	small4(t_nbr *nbr)
 {
-    int first;
+	int	first;
 
-    first = nbr->lst->index;
-    while (first != 0)
-    {
-        ra(nbr);
-        first = nbr->lst->index;
-    }
-    pb(nbr);
-    small3(nbr);
-    pa(nbr);
+	first = nbr->lst->index;
+	while (first != 0)
+	{
+		ra(nbr);
+		first = nbr->lst->index;
+	}
+	pb(nbr);
+	small3(nbr);
+	pa(nbr);
 }
 
-int     small5(t_nbr *nbr)
+void	small5(t_nbr *nbr)
 {
-    int first;
+	int	first;
 
-    first = nbr->lst->index;
-    while (first != 0)
-    {
-        ra(nbr);
-        first = nbr->lst->index;
-    }
-    pb(nbr);
-    first = nbr->lst->index;
-    while (first != 1)
-    {
-        ra(nbr);
-        first = nbr->lst->index;
-    }
-    pb(nbr);
-    small3(nbr);
-    pa(nbr);
-    pa(nbr);
+	first = nbr->lst->index;
+	while (first != 0)
+	{
+		ra(nbr);
+		first = nbr->lst->index;
+	}
+	pb(nbr);
+	first = nbr->lst->index;
+	while (first != 1)
+	{
+		ra(nbr);
+		first = nbr->lst->index;
+	}
+	pb(nbr);
+	small3(nbr);
+	pa(nbr);
+	pa(nbr);
 }
 
-void    radix(t_nbr *nbr)
+void	radix(t_nbr *nbr)
 {
-    int tmp;
-    int mask;
-    int lenbits;
-    int i;
-    int j;
-    int a;
+	int	tmp;
+	int	mask;
+	int	i;
+	int	j;
 
-    lenbits = 0;
-    while ((nbr->len - 1) >> lenbits != 0)
-        lenbits++;
-    i = -1;
-    a = 0;
-    /*tmp = nbr->lst->next->index;
-    a = (tmp & mask);
-    ft_printf("a = %d\n", a);*/
-    while (++i < lenbits)
-    {
-        j = -1;
-        while (++j < nbr->len)
-        {
-            mask = 1 << i;
-            tmp = nbr->lst->index;
-            ft_printf("tmp = %d\n", tmp);
-            a = (tmp & mask);
-            ft_printf("a = %d\n", a);
-            if (a == 0)
-                pb(nbr);
-            else
-                ra(nbr);
-        }
-        //ft_lstiiter(nbr->pileB);
-        while (nbr->pileB)
-            pa(nbr);
-    }
-    //ft_lstiiter(nbr->lst);
+	i = -1;
+	nbr->a = 0;
+	ned(nbr);
+	while (++i < nbr->lenbits)
+	{
+		j = -1;
+		while (++j < nbr->len)
+		{
+			mask = 1 << i;
+			tmp = nbr->lst->index;
+			nbr->a = (tmp & mask);
+			if (nbr->a == 0)
+				pb(nbr);
+			else
+				ra(nbr);
+		}
+		while (nbr->pileb)
+			pa(nbr);
+	}
 }
 
-void    sort(t_nbr *nbr)
+void	ned(t_nbr *nbr)
 {
-    if (nbr->len == 3)
-        small3(nbr);
-    else if (nbr->len == 4)
-        small4(nbr);
-    else if (nbr->len == 5)
-        small5(nbr);
-    else
-        radix(nbr);
+	nbr->lenbits = 0;
+	while ((nbr->len - 1) >> nbr->lenbits != 0)
+		nbr->lenbits++;
 }
