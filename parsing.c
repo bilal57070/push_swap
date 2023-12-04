@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:32:28 by mirio             #+#    #+#             */
-/*   Updated: 2023/11/02 19:10:02 by mirio            ###   ########.fr       */
+/*   Updated: 2023/12/04 16:49:34 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	checkmax(t_nbr *nbr, char **av)
 	i = -1;
 	while (nbr->tab[++i])
 	{
-		if (nbr->tab[i] < -2147483647 || nbr->tab[i] > 2147483646)
+		if (nbr->tab[i] <= INT_MIN || nbr->tab[i] >= INT_MAX)
 		{
-			ft_printf("Error\n");
+			ft_printf("Error max\n");
 			exit(1);
 		}
 	}

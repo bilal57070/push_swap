@@ -6,17 +6,17 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:33:59 by bsafi             #+#    #+#             */
-/*   Updated: 2023/11/02 18:56:42 by mirio            ###   ########.fr       */
+/*   Updated: 2023/12/04 16:53:49 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
-	int	i;
-	int	sign;
-	int	res;
+	int			i;
+	int			sign;
+	long int	res;
 
 	i = 0;
 	sign = 1;

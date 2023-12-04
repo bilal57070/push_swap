@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:37:30 by mirio             #+#    #+#             */
-/*   Updated: 2023/11/02 19:08:52 by mirio            ###   ########.fr       */
+/*   Updated: 2023/12/04 16:47:56 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,23 @@ void		checklet(char **av);
 
 typedef struct list
 {
-	long		num;
-	int			index;
-	struct list	*next;
+	long int		num;
+	int				index;
+	struct list		*next;
 }				t_liste;
 
 typedef struct s_nbr
 {
-	int		*tab;
-	int		lenstr;
-	char	**r;
-	int		ar;
-	int		len;
-	int		o;
-	int		a;
-	int		lenbits;
-	t_liste	*lst;
-	t_liste	*pileb;
+	long int		*tab;
+	int				lenstr;
+	char			**r;
+	int				ar;
+	int				len;
+	int				o;
+	int				a;
+	int				lenbits;
+	t_liste			*lst;
+	t_liste			*pileb;
 }			t_nbr;
 
 int			checkmax(t_nbr *nbr, char **av);
