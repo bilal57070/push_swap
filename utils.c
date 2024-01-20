@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:32:55 by mirio             #+#    #+#             */
-/*   Updated: 2023/11/02 18:34:13 by mirio            ###   ########.fr       */
+/*   Updated: 2024/01/16 00:30:58 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,19 @@ t_liste	*ft_lstlastb(t_liste *iter)
 		iter = iter->next;
 	}
 	return (iter);
+}
+
+void	ft_lstfree(t_nbr *nbr)
+{
+	t_liste	*tmp;
+
+	while (nbr->lst)
+	{
+		tmp = nbr->lst;
+		nbr->lst = nbr->lst->next;
+		if (tmp)
+			free(tmp);
+	}
 }
 
 void	rrr(t_nbr *nbr)

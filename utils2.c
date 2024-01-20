@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:32:59 by mirio             #+#    #+#             */
-/*   Updated: 2023/11/02 18:20:37 by mirio            ###   ########.fr       */
+/*   Updated: 2024/01/19 18:53:59 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	putrav(t_nbr *nbr, char **av)
 		tmp = ft_split(av[i], ' ');
 		nbr->r = strjoin2(nbr->r, tmp);
 	}
+	puttab(nbr);
 }
 
 void	free_tab(char **str)

@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:37:30 by mirio             #+#    #+#             */
-/*   Updated: 2023/12/04 16:47:56 by mirio            ###   ########.fr       */
+/*   Updated: 2024/01/19 18:51:13 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,13 @@ void		temp(char **s1, char **s2, char **str);
 void		putrav(t_nbr *nbr, char **av);
 void		free_tab(char **str);
 void		indexing(t_nbr *nbr);
+int			begin(t_nbr *nbr);
 void		small3(t_nbr *nbr);
 void		small4(t_nbr *nbr);
 void		sort(t_nbr *nbr);
 void		radix(t_nbr *nbr);
 void		ned(t_nbr *nbr);
 void		small5(t_nbr *nbr);
+void		ft_lstfree(t_nbr *nbr);
 
 #endif

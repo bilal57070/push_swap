@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:32:50 by mirio             #+#    #+#             */
-/*   Updated: 2023/11/02 18:33:25 by mirio            ###   ########.fr       */
+/*   Updated: 2024/01/20 16:50:21 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,29 @@
         puttab(nbr, nbr->r);
     }
 }*/
+
+int	begin(t_nbr *nbr)
+{
+	t_liste	*tmp;
+	t_liste	*tmp2;
+
+	tmp2 = nbr->lst;
+	while (tmp2)
+	{
+		tmp = tmp2->next;
+		while (tmp)
+		{
+			if (tmp2->num > tmp->num)
+				return (0);
+			tmp = tmp->next;
+		}
+		tmp2 = tmp2->next;
+	}
+	ft_lstfree(nbr);
+	free(nbr->tab);
+	free_tab(nbr->r);
+	return (1);
+}
 
 void	puttab(t_nbr *nbr)
 {
@@ -74,6 +97,15 @@ void	sorttab(t_nbr *nbr)
 	}
 	indexing(nbr);
 }
+
+/*void	printab(t_nbr *nbr)
+{
+    int i;
+
+    i = -1;
+    while (nbr->tab[++i])
+        ft_printf("TAB = %d\n", nbr->tab[i]);
+}*/
 
 void	indexing(t_nbr *nbr)
 {
