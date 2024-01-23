@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:32:38 by mirio             #+#    #+#             */
-/*   Updated: 2024/01/19 19:05:56 by mirio            ###   ########.fr       */
+/*   Updated: 2024/01/23 16:35:59 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ t_liste	*ft_lstput2(t_nbr *nbr)
 		new = malloc(sizeof(t_liste));
 		if (!new)
 			return (0);
-		new->num = ft_atoi(nbr->r[i]);
+		new->num = nbr->tab[i];
 		new->next = NULL;
 		if (i == 0)
 		{
@@ -155,16 +155,21 @@ t_liste	*ft_lstput2(t_nbr *nbr)
 	}
 }*/
 
-int	lenr(char **str)
+void	free_all(t_nbr *nbr)
+{
+	free(nbr->tab);
+	free_tab(nbr->r);
+	ft_lstfree(nbr);
+}
+
+void	lenr(t_nbr *nbr)
 {
 	int	i;
-	int	len;
 
 	i = -1;
-	len = 0;
-	while (str[++i])
-		len++;
-	return (len);
+	nbr->len = 0;
+	while (nbr->r[++i])
+		nbr->len++;
 }
 
 // RESOUDRE LEAK OU JSP VALGRIND SA GRAND MERE

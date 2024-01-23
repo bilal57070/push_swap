@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:37:30 by mirio             #+#    #+#             */
-/*   Updated: 2024/01/19 18:51:13 by mirio            ###   ########.fr       */
+/*   Updated: 2024/01/23 17:03:01 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_nbr
 int			checkmax(t_nbr *nbr, char **av);
 void		lenarg(t_nbr *nbr, char **av);
 int			ft_strcmp(const char *s1, const char *s2);
-int			lenr(char **str);
+void		lenr(t_nbr *nbr);
 int			checkdoub1(t_nbr *nbr);
 void		nego(t_nbr *nbr, int i, int p);
 void		ft_lstiiter(t_liste *lst);
@@ -84,5 +84,7 @@ void		radix(t_nbr *nbr);
 void		ned(t_nbr *nbr);
 void		small5(t_nbr *nbr);
 void		ft_lstfree(t_nbr *nbr);
+void		free_all(t_nbr *nbr);
+void		checkdoub(t_nbr *nbr);
 
 #endif

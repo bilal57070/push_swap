@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:31:48 by mirio             #+#    #+#             */
-/*   Updated: 2024/01/19 18:54:04 by mirio            ###   ########.fr       */
+/*   Updated: 2024/01/23 16:36:20 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	main(int ac, char **av)
 	nbr.pileb = NULL;
 	checkav(av);
 	putrav(&nbr, av);
-	checkdoub1(&nbr);
+	puttab(&nbr);
+	checkdoub(&nbr);
 	ft_lstput2(&nbr);
 	checkmax(&nbr, av);
 	if (begin(&nbr))
@@ -36,7 +37,5 @@ int	main(int ac, char **av)
 		sorttab(&nbr);
 		sort(&nbr);
 	}
-	free(nbr.tab);
-	free_tab(nbr.r);
-	ft_lstfree(&nbr);
+	free_all(&nbr);
 }

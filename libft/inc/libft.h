@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:46:08 by bsafi             #+#    #+#             */
-/*   Updated: 2023/12/04 16:54:51 by mirio            ###   ########.fr       */
+/*   Updated: 2024/01/23 17:05:07 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ size_t			ft_strlen(const char *str);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
 
 long int		ft_atoi(const char *str);
+
+void			check(int a);
 
 void			*ft_memmove(void *dest, const void *src, size_t n);
 

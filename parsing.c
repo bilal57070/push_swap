@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:32:28 by mirio             #+#    #+#             */
-/*   Updated: 2024/01/19 18:53:41 by mirio            ###   ########.fr       */
+/*   Updated: 2024/01/23 16:42:38 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ int	checkmax(t_nbr *nbr, char **av)
 	int	i;
 
 	i = -1;
-	while (nbr->tab[++i])
+	while (nbr->tab[++i] <= nbr->len)
 	{
 		if (nbr->tab[i] <= INT_MIN || nbr->tab[i] >= INT_MAX)
 		{
+			free_all(nbr);
 			ft_printf("Error max\n");
 			exit(1);
 		}
@@ -66,7 +67,7 @@ int	checkav(char **av)
         checkdoub2(nbr, av);
 }*/
 
-int	checkdoub1(t_nbr *nbr)
+/*int	checkdoub1(t_nbr *nbr)
 {
 	int	i;
 	int	p;
@@ -74,10 +75,11 @@ int	checkdoub1(t_nbr *nbr)
 	i = -1;
 	p = 0;
 	nbr->o = 0;
-	nbr->len = lenr(nbr->r);
+	lenr(nbr);
 	nego(nbr, i, p);
 	if (nbr->o > nbr->len)
 	{
+		//free_tab(nbr->r);
 		ft_printf("error: doublon nombre r\n");
 		exit(1);
 	}
@@ -89,7 +91,7 @@ void	nego(t_nbr *nbr, int i, int p)
 	int	res;
 	int	j;
 
-	while (nbr->r[++i])
+	while (nbr->r[++i] && nbr->r[p])
 	{
 		j = -1;
 		res = 0;
@@ -103,6 +105,32 @@ void	nego(t_nbr *nbr, int i, int p)
 		{
 			i = 0;
 			p++;
+		}
+	}
+}*/
+
+void	checkdoub(t_nbr *nbr)
+{
+	int	i;
+	int	j;
+	int	sah;
+
+	i = -1;
+	while (++i < (nbr->len))
+	{
+		j = -1;
+		sah = 0;
+		while (++j < (nbr->len))
+		{
+			if (nbr->tab[j] == nbr->tab[i])
+				sah++;
+		}
+		if (sah > 1)
+		{
+			free(nbr->tab);
+			free_tab(nbr->r);
+			ft_printf("error : doublons nombre\n");
+			exit(1);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mirio <mirio@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:32:50 by mirio             #+#    #+#             */
-/*   Updated: 2024/01/20 16:50:21 by mirio            ###   ########.fr       */
+/*   Updated: 2024/01/23 17:02:40 by mirio            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	puttab(t_nbr *nbr)
 
 	j = 0;
 	i = -1;
-	nbr->tab = malloc(sizeof(int) * nbr->len + 1);
+	lenr(nbr);
+	nbr->tab = malloc(sizeof(long int) * nbr->len);
 	while (nbr->r[++i])
 	{
 		nbr->tab[j] = ft_atoi(nbr->r[i]);
 		j++;
 	}
-	nbr->tab[i] = 0;
 }
 
 /*void    sorttab1(t_nbr *nbr)
